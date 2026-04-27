@@ -19,8 +19,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
      reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
 
-    await update.message.reply_text(
-        "Вітаємо! Натисніть кнопку нижче, щоб розпочати роботу з ботом:",
+     await update.message.reply_text(
+        "Вітаємо! Натисніть кнопку Меню, щоб розпочати роботу з ботом:",
         reply_markup=reply_markup
     )
 
