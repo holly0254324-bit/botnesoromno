@@ -144,5 +144,13 @@ app.add_handler(MessageHandler(filters.CONTACT, contact_handler))
 
 app.add_handler(MessageHandler(filters.TEXT, category_handler))
 
-app.run_polling()
+import asyncio
+
+async def main():
+    await app.initialize()
+    await app.start()
+    await app.updater.start_polling()
+    await asyncio.Event().wait()
+
+asyncio.run(main())
 
