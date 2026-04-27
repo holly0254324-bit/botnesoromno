@@ -23,7 +23,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
      user_id = str(update.effective_chat.id)
 
-    if not os.path.exists(USERS_FILE):
+        if not os.path.exists(USERS_FILE):
         open(USERS_FILE, "w").close()
 
     with open(USERS_FILE, "r+") as f:
