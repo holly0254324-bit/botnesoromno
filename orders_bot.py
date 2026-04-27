@@ -9,7 +9,6 @@ USERS_FILE = "users.txt"
 ADMIN_ID = 123456789  # сюда вставим твой chat_id
 
 print("BOT STARTED SUCCESSFULLY")
-print(update.effective_chat.id)
 
 orders = pd.read_excel("orders.xlsx")
 products = pd.read_excel("products.xlsx")
@@ -20,6 +19,8 @@ categories = products["Раздел"].dropna().unique().tolist()
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
+    print(update.effective_chat.id)
 
     user_id = str(update.effective_chat.id)
 
