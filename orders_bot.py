@@ -147,6 +147,7 @@ app = ApplicationBuilder().token(TOKEN).build()
 
 app.add_handler(CommandHandler("start", start))
 
+app.add_handler(MessageHandler(filters.Regex("^▶️ Почати$"), main_menu))
 app.add_handler(MessageHandler(filters.Regex("^📦 Мої замовлення$"), orders_button))
 app.add_handler(MessageHandler(filters.Regex("^🛒 Каталог товарів$"), catalog_button))
 app.add_handler(MessageHandler(filters.Regex("^⬅️ Головне меню$"), start))
@@ -154,7 +155,7 @@ app.add_handler(MessageHandler(filters.Regex("^⬅️ Головне меню$")
 app.add_handler(MessageHandler(filters.CONTACT, contact_handler))
 
 app.add_handler(MessageHandler(filters.TEXT, category_handler))
-app.add_handler(MessageHandler(filters.Regex("^▶️ Почати$"), main_menu))
+
 
 import asyncio
 
