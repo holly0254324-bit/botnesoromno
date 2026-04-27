@@ -6,7 +6,7 @@ TOKEN = "8657044201:AAEXw0JVeLU6FAbHeKB5KxZriTJo_et99Ik"
 import os
 
 USERS_FILE = "users.txt"
-ADMIN_ID = 123456789  # сюда вставим твой chat_id
+ADMIN_ID = 330847417  # сюда вставим твой chat_id
 
 print("BOT STARTED SUCCESSFULLY")
 
@@ -19,9 +19,7 @@ categories = products["Раздел"].dropna().unique().tolist()
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-
-    print(update.effective_chat.id)
-
+    
     user_id = str(update.effective_chat.id)
 
     if not os.path.exists(USERS_FILE):
