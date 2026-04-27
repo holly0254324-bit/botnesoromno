@@ -3,7 +3,13 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, fil
 import pandas as pd
 
 TOKEN = "8657044201:AAEXw0JVeLU6FAbHeKB5KxZriTJo_et99Ik"
+import os
+
+USERS_FILE = "users.txt"
+ADMIN_ID = 123456789  # сюда вставим твой chat_id
+
 print("BOT STARTED SUCCESSFULLY")
+print(update.effective_chat.id)
 
 orders = pd.read_excel("orders.xlsx")
 products = pd.read_excel("products.xlsx")
@@ -14,6 +20,16 @@ categories = products["Раздел"].dropna().unique().tolist()
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
+     user_id = str(update.effective_chat.id)
+
+    if not os.path.exists(USERS_FILE):
+        open(USERS_FILE, "w").close()
+
+    with open(USERS_FILE, "r+") as f:
+        users = f.read().splitlines()
+        if user_id not in users:
+            f.write(user_id + "\n")
 
      keyboard = [["▶️ Почати"]]
 
@@ -111,7 +127,35 @@ async def catalog_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reply_markup=reply_markup
     )
 
+async def broadcast(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
+    if update.effective_chat.id != ADMIN_ID:
+        return
+
+    if not context.args:
+        await update.message.reply_text("Напиши текст після команди")
+        return
+
+    text = " ".join(context.args)
+
+    if not os.path.exists(USERS_FILE):
+        await update.message.reply_text("Список користувачів порожній")
+        return
+
+    with open(USERS_FILE, "r") as f:
+        users = f.read().splitlines()
+
+    sent = 0
+
+    for user in users:
+        try:
+            await context.bot.send_message(chat_id=user, text=text)
+            sent += 1
+        except:
+            pass
+
+    await update.message.reply_text(f"Розсилка завершена. Надіслано: {sent}")
+     
 async def category_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     category = update.message.text
@@ -146,7 +190,7 @@ async def category_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 app = ApplicationBuilder().token(TOKEN).build()
 
 app.add_handler(CommandHandler("start", start))
-
+app.add_handler(CommandHandler("broadcast", broadcast))
 app.add_handler(MessageHandler(filters.Regex("^▶️ Почати$"), main_menu))
 app.add_handler(MessageHandler(filters.Regex("^📦 Мої замовлення$"), orders_button))
 app.add_handler(MessageHandler(filters.Regex("^🛒 Каталог товарів$"), catalog_button))
