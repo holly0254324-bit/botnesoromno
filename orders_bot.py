@@ -21,9 +21,9 @@ categories = products["Раздел"].dropna().unique().tolist()
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
-     user_id = str(update.effective_chat.id)
+    user_id = str(update.effective_chat.id)
 
-        if not os.path.exists(USERS_FILE):
+    if not os.path.exists(USERS_FILE):
         open(USERS_FILE, "w").close()
 
     with open(USERS_FILE, "r+") as f:
@@ -31,15 +31,15 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if user_id not in users:
             f.write(user_id + "\n")
 
-     keyboard = [["▶️ Почати"]]
+    keyboard = [["▶️ Почати"]]
 
-     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+    reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
 
-     await update.message.reply_text(
+    await update.message.reply_text(
         "Вітаємо! Натисніть кнопку Меню, щоб розпочати роботу з ботом:",
         reply_markup=reply_markup
     )
-
+     
 async def main_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     keyboard = [
