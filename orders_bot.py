@@ -3,6 +3,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, fil
 import pandas as pd
 
 TOKEN = "8657044201:AAEXw0JVeLU6FAbHeKB5KxZriTJo_et99Ik"
+print("BOT STARTED SUCCESSFULLY")
 
 orders = pd.read_excel("orders.xlsx")
 products = pd.read_excel("products.xlsx")
@@ -143,4 +144,5 @@ app.add_handler(MessageHandler(filters.CONTACT, contact_handler))
 
 app.add_handler(MessageHandler(filters.TEXT, category_handler))
 
-app.run_polling()
+app.run_polling()
+
