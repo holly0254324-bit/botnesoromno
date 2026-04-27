@@ -17,12 +17,14 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
      keyboard = [["▶️ Почати"]]
 
-         reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
 
     await update.message.reply_text(
         "Вітаємо! Натисніть кнопку нижче, щоб розпочати роботу з ботом:",
         reply_markup=reply_markup
     )
+
+async def main_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     keyboard = [
         ["📦 Мої замовлення"],
