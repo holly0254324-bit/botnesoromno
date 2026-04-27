@@ -15,6 +15,15 @@ categories = products["Раздел"].dropna().unique().tolist()
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
+     keyboard = [["▶️ Почати"]]
+
+    reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+
+    await update.message.reply_text(
+        "Вітаємо! Натисніть кнопку нижче, щоб розпочати роботу з ботом:",
+        reply_markup=reply_markup
+    )
+
     keyboard = [
         ["📦 Мої замовлення"],
         ["🛒 Каталог товарів"]
@@ -143,6 +152,7 @@ app.add_handler(MessageHandler(filters.Regex("^⬅️ Головне меню$")
 app.add_handler(MessageHandler(filters.CONTACT, contact_handler))
 
 app.add_handler(MessageHandler(filters.TEXT, category_handler))
+app.add_handler(MessageHandler(filters.Regex("^▶️ Почати$"), main_menu))
 
 import asyncio
 
