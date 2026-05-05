@@ -2,7 +2,7 @@ from telegram import Update, ReplyKeyboardMarkup, KeyboardButton
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 import pandas as pd
 
-TOKEN = "8657044201:AAEXw0JVeLU6FAbHeKB5KxZriTJo_et99Ik"
+TOKEN = "8657044201:AAFsMJRzxWlWeeTaIZlvZecwnQsQ6odi2fI"
 import os
 
 USERS_FILE = "users.txt"
