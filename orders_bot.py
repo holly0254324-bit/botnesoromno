@@ -2,8 +2,8 @@ from telegram import Update, ReplyKeyboardMarkup, KeyboardButton
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 import pandas as pd
 
-TOKEN = "8657044201:AAFsMJRzxWlWeeTaIZlvZecwnQsQ6odi2fI"
 import os
+TOKEN = os.getenv("BOT_TOKEN")
 
 USERS_FILE = "users.txt"
 ADMIN_ID = 330847417  # сюда вставим твой chat_id
